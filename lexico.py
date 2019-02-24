@@ -3,7 +3,9 @@
 # ord() function para sacar el código ascii de un caracter
 
 
-""" [[XYZ -> es un string],
+""" 
+Salida esperada
+[[XYZ -> es un string],
 [. -> es un punto],
 [8045 -> es un entero],
 [400.55 -> es un decimal],
@@ -11,21 +13,6 @@
 
 import re
 stringFinal = []
-""" matriz = [[0,1,2,3,4,5,6,7,8,9,10,11], # Estados iniciales
-          [1,1,3,3,4,204,207,209,211,213,215,217], # Estados para los números
-          [4,200,300,201,4,204,207,209,211,213,215,217], # Estados para letras
-          [5,200,300,201,202,204,206,209,211,213,215,217], # >
-          [6,200,300,201,202,204,207,209,211,213,215,217], # <
-          [9,200,300,201,202,203,205,209,211,212,214,217], # =
-          [7,200,300,201,202,204,207,208,211,213,215,217], # +
-          [8,200,300,201,202,204,207,209,210,213,215,217], # -
-          [404,200,300,201,202,204,207,209,211,213,215,217], # *
-          [11,200,300,201,202,204,207,209,211,213,215,216], # /
-          [10,200,300,201,202,204,207,209,211,213,215,217], # !
-          [404,200,300,201,202,204,207,209,211,213,215,217], # %
-          [404,200,300,201,202,204,207,209,211,213,215,217], # #
-          [404,200,300,201,202,204,207,209,211,213,215,217] # .
-        ] # Los "404" son los vacíos """
 
 matriz = [# Estados iniciales
           [0,1,4,5,6,9,7,8,404,11,10,404,404,404], 
@@ -38,54 +25,55 @@ matriz = [# Estados iniciales
           [7,209,209,209,209,209,208,209,209,209,209,209,209,209], # -
           [8,211,211,211,211,211,211,210,211,211,211,211,211,211], # *
           [9,213,213,213,213,212,213,213,213,213,213,213,213,213], # /
-          [10,200,300,201,202,204,207,209,211,213,215,217], # !
-          [11,200,300,201,202,204,207,209,211,213,215,217] # %
+          [10,215,215,215,215,214,215,215,215,215,215,215,215,215], # !
+          [11,217,217,217,217,217,217,217,217,216,217,217,217,217] # %
         ] # Los "404" son los vacíos
 
-""" if char == '+':
-    EDO=7
-    [6][EDO] """
-    #matriz[EDO][]
+class cambiaestados(object):
+    def estadosiniciales(self, argument):
+
+            method_name = 'estado_' + str(argument)
+            method = getattr(self, method_name, lambda: "Estado no existente")
+            return method()
+    
+    def estado_0(self):
+        return "Estas en el estado 0"
+
+    def estado_1(self):
+        return "Estas en el estado 1"
+        
+    def estado_2(self):
+        return "Estas en el estado 2"
+    
+    def estado_3(self):
+        return "Estas en el estado 3"
+    
+    def estado_4(self):
+        return "Estas en el estado 4"
+
+    def estado_5(self):
+        return "Estas en el estado 5"
+
+    def estado_6(self):
+        return "Estas en el estado 6"
+
+    def estado_7(self):
+        return "Estas en el estado 7"
+
+    def estado_8(self):
+        return "Estas en el estado 8"
+
+    def estado_9(self):
+        return "Estas en el estado 9"
+
+    def estado_10(self):
+        return "Estas en el estado 10"
+
+    def estado_11(self):
+        return "Estas en el estado 11"
+
 def main():
 
-    def edo1(chartr):
-        
-        while True:
-            if chartr.isdigit():
-                print(chartr+" es un número!")
-    
-    def edo2(char):
-        return ""
-    
-    def edo3(char):
-        return ""
-    
-    def edo4(char):
-        return ""
-    
-    def edo5(char):
-        return ""
-    
-    def edo6(char):
-        return ""
-    
-    def edo7(char):
-        return ""
-    
-    def edo8(char):
-        return ""
-    
-    def edo9(char):
-        return ""
-    
-    def edo10(char):
-        return ""
-    
-    def edo11(char):
-        return ""
-    
-    def edo211(char):
-        return ""
 
     with open("fuente.txt","r") as f:
         while True:
@@ -94,8 +82,10 @@ def main():
                 EDO = 0
                 caracter = 0
                 caracter = caracter + 1
+                cadena = 0
                 cadena = cadena + caracter
-                EDO = matriz[EDO,COLUMNA]
+                EDO = matriz[EDO][1]
+                print(EDO)
                 for line in f: # aquí leemos la linea completa
                     for chartr in line: # e iteramos la linea caracter por caracter
                         """ aquí leemos cada caracter de la linea
@@ -134,6 +124,7 @@ def main():
             break # interrumpe el programa cuando termina de leer las lineas
     f.close() # Cerrar el archivo a leer 
 
-matriz_estados ={200: "enteros"}
 if __name__ == "__main__":
+    x=cambiaestados()
+    x.estadosiniciales(0)
     main()
